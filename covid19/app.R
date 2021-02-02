@@ -39,6 +39,7 @@ ui <- fluidPage(
                            'Japan',
                            'Morocco',
                            'Netherlands',
+                           'Portugal',
                            'Russia',
                            'Spain',
                            'Sweden',
