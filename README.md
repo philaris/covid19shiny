@@ -1,7 +1,8 @@
 # COVID-19 Shiny plot app
 
 This is a Shiny app that shows COVID-19 plots for several countries.
-Every time the app starts, it downloads data from JHU CSSE.
+Every time the container starts, it downloads data from JHU CSSE
+and it repeats the download daily.
 
 ### Docker image
 
