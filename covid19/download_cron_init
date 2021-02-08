@@ -1,0 +1,6 @@
+#!/bin/execlineb -S0
+foreground { echo "INFO: initial data download" }
+foreground { Rscript /srv/get_data.R }
+foreground { echo "INFO: running cron" }
+foreground { cron }
+/init

@@ -3,8 +3,8 @@ assign('%>%', base::getExportedValue('magrittr', '%>%'))
 
 options(scipen=15)
 
-cases <- readr::read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv')
-deaths <- readr::read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv')
+cases <- readr::read_csv('/srv/data/cases.csv')
+deaths <- readr::read_csv('/srv/data/deaths.csv')
 
 lst <- list('Cases' = cases, 'Deaths' = deaths)
 
