@@ -3,11 +3,6 @@ assign('%>%', base::getExportedValue('magrittr', '%>%'))
 
 options(scipen=15)
 
-cases <- readr::read_csv('/srv/data/cases.csv')
-deaths <- readr::read_csv('/srv/data/deaths.csv')
-
-lst <- list('Cases' = cases, 'Deaths' = deaths)
-
 date_labeled <- function(tb, country) {
   cntry.tb <- tb %>%
     dplyr::filter(is.na(.data[['Province/State']])) %>%
@@ -67,6 +62,10 @@ ui <- fluidPage(
 
 
 server <- function(input, output) {
+  cases <- readr::read_csv('/srv/data/cases.csv')
+  deaths <- readr::read_csv('/srv/data/deaths.csv')
+  lst <- list('Cases' = cases, 'Deaths' = deaths)
+
   output[['covid_plot']] <- shiny::renderPlot({
     barplot(date_labeled(lst[[input[['ts_type']]]], input[['location']]), main = '')
   })
