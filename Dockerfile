@@ -4,8 +4,9 @@ MAINTAINER Panagiotis Cheilaris "philaris@gmail.com"
 
 RUN apt-get update && apt-get install -y cron
 
-RUN mkdir -p /srv/data
+RUN install2.r -e zoo
 
+RUN mkdir -p /srv/data
 
 COPY covid19/get_data.R /srv/
 

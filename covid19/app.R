@@ -70,7 +70,10 @@ server <- function(input, output) {
     barplot(date_labeled(lst[[input[['ts_type']]]], input[['location']]), main = '')
   })
   output[['diff_plot']] <- shiny::renderPlot({
-    barplot(diff(date_labeled(lst[[input[['ts_type']]]], input[['location']])), main = 'diff')
+    mp <- barplot(diff(date_labeled(lst[[input[['ts_type']]]], input[['location']])),
+                  main = 'daily with right-aligned 7-day average')
+    lines(mp, zoo::rollmean(diff(date_labeled(lst[[input[['ts_type']]]], input[['location']])),
+                            k = 7, fill = 'extend', align = 'right'), col = 'blue')
   })
   output[['last_date']] <- shiny::renderText({
     as.character(as.Date(tail(colnames(lst[[input[['ts_type']]]]), n = 1L), format = '%m/%d/%y'))
