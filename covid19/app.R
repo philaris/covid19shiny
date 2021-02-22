@@ -15,11 +15,11 @@ date_labeled <- function(tb, country) {
   } else {
     provcntry.tb %>%
       dplyr::select(-'Province/State') %>%
-      rowSums()
+      colSums()
   }
-  assertthat::assert_that(nrow(cntry.tb) == 1L)
+  assertthat::assert_that(nrow(cntry.tb) == 1L || is.numeric(cntry.tb))
   nums <- as.numeric(cntry.tb)
-  dts <- as.Date(colnames(cntry.tb), format = '%m/%d/%y')
+  dts <- as.Date(names(cntry.tb), format = '%m/%d/%y')
   names(nums) <- dts
   return(nums)
 }
