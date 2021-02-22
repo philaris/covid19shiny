@@ -4,10 +4,19 @@ assign('%>%', base::getExportedValue('magrittr', '%>%'))
 options(scipen=15)
 
 date_labeled <- function(tb, country) {
-  cntry.tb <- tb %>%
-    dplyr::filter(is.na(.data[['Province/State']])) %>%
+  provcntry.tb <- tb %>%
     dplyr::filter(.data[['Country/Region']] == country) %>%
-    dplyr::select(-c('Province/State', 'Country/Region', 'Lat', 'Long'))
+    dplyr::select(-c('Country/Region', 'Lat', 'Long'))
+  has_na_province <- any(is.na(provcntry.tb[['Province/State']]))
+  cntry.tb <- if (has_na_province) {
+    provcntry.tb %>%
+      dplyr::filter(is.na(.data[['Province/State']])) %>%
+      dplyr::select(-'Province/State')
+  } else {
+    provcntry.tb %>%
+      dplyr::select(-'Province/State') %>%
+      rowSums()
+  }
   assertthat::assert_that(nrow(cntry.tb) == 1L)
   nums <- as.numeric(cntry.tb)
   dts <- as.Date(colnames(cntry.tb), format = '%m/%d/%y')
