@@ -69,10 +69,22 @@ ui <- fluidPage(
   )
 )
 
+file_or_web <- function(fname, url) {
+  if (file.exists(fname)) fname else url
+}
 
 server <- function(input, output) {
-  cases <- readr::read_csv('/srv/data/cases.csv')
-  deaths <- readr::read_csv('/srv/data/deaths.csv')
+  fcases <- file_or_web(
+    '/srv/data/cases.csv',
+    'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv')
+  message('INFO: Using ', fcases)
+  fdeaths <- file_or_web(
+    '/srv/data/deaths.csv',
+    'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv'
+  )
+  message('INFO: Using ', fdeaths)
+  cases <- readr::read_csv(fcases)
+  deaths <- readr::read_csv(fdeaths)
   lst <- list('Cases' = cases, 'Deaths' = deaths)
 
   output[['covid_plot']] <- shiny::renderPlot({
