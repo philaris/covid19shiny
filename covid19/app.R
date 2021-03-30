@@ -51,6 +51,7 @@ ui <- fluidPage(
                            'United Kingdom',
                            'US'
                          ),
+                         selected = 'Greece',
                          multiple = FALSE),
       shiny::selectInput("ts_type", "Timeseries:",
                          choices = c(
