@@ -31,6 +31,7 @@ ui <- fluidPage(
       shiny::textOutput('last_date'),
       shiny::selectInput("location", "Location:",
                          choices = c(
+                           'Austria',
                            'Belgium',
                            'Brazil',
                            'China',
