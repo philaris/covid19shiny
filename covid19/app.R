@@ -25,6 +25,12 @@ date_labeled <- function(tb, country) {
 }
 
 ui <- fluidPage(
+  tags[['head']](
+    tags[['meta']](
+      name = 'google-site-verification',
+      content = 'TTIuTACji3mZAjdejEI6xtHt7quS8jMf2LwGIrD3OIw'
+    )
+  ),
   titlePanel("COVID-19 cases and deaths"),
   sidebarLayout(
     sidebarPanel(
