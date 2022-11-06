@@ -1,4 +1,4 @@
-FROM rocker/shiny-verse:latest
+FROM rocker/shiny-verse:4.2.2
 
 MAINTAINER Panagiotis Cheilaris "philaris@gmail.com"
 
